@@ -1,4 +1,4 @@
-﻿using Srock.Domain.Entities.Shared;
+﻿using Stock.Domain.Entities.Shared;
 
 namespace Stock.Domain.Entities.Products
 {

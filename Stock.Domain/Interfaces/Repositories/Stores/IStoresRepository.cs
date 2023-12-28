@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Stock.Domain.Entities.Stores;
+using Stock.Domain.Interfaces.Repositories.Shared;
 
-namespace Stock.Domain.Interfaces.Repositories
+namespace Stock.Domain.Interfaces.Repositories.Stores
 {
-    internal interface IStoresRepository
+    public interface IStoresRepository : IGenericRepository<Store>
     {
     }
 }

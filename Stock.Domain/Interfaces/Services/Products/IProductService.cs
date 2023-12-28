@@ -1,6 +1,7 @@
-﻿namespace Stock.Domain.Interfaces.Services.Stores
+﻿namespace Stock.Domain.Interfaces.Services.Products
 {
     public interface IProductService
     {
+
     }
 }

@@ -6,6 +6,6 @@ namespace Stock.Domain.Interfaces.UnitOfWork
     public interface IUnitOfWork : IDisposable
     {
         IStoresRepository Stores { get; }
-        IProductsRepository ProductsRepository { get; }
+        IProductsRepository Products { get; }
     }
 }
