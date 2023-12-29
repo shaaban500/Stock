@@ -1,15 +1,32 @@
+using Microsoft.EntityFrameworkCore;
+using Stock.Application.Services.Products;
+using Stock.Application.Services.store;
+using Stock.Domain.Interfaces.Services.Products;
+using Stock.Domain.Interfaces.Services.Stores;
+using Stock.Domain.Interfaces.UnitOfWork;
+using Stock.Infrastructure.Contexts;
+using Stock.Infrastructure.UnitOfWork;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDbContext<AppDBContext>(
+    options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<IStoresService, storeService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

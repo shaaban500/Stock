@@ -6,6 +6,6 @@ namespace Stock.Domain.Entities.Stores
     public class Store : BaseEntity
     {
         public string Name { get; set; }
-        public List<Product> Products { get; set; }
+        public IList<Product> Products { get; set; }
     }
 }
