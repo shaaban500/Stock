@@ -1,4 +1,6 @@
-﻿using Stock.Domain.Entities.Stores;
+﻿using AutoMapper;
+using Stock.Domain.ViewModels.Stores;
+using Stock.Domain.Entities.Stores;
 using Stock.Domain.Interfaces.Services.Stores;
 using Stock.Domain.Interfaces.UnitOfWork;
 
@@ -6,19 +8,37 @@ namespace Stock.Application.Services.store
 {
     public class storeService : IStoresService
     {
+        private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public storeService(IUnitOfWork unitOfWork)
+
+        public storeService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+        
+        public async Task<StoreViewModel> GetById(long id = 0)
+        { 
+            var store = await _unitOfWork.Stores.GetByIdAsync(id);
+            var storeViewModel = _mapper.Map<StoreViewModel>(store);
+            return storeViewModel;
         }
 
-        public async Task<List<Store>> GetAll()
+
+        public async Task<GetAllStoresViewModel> GetAll()
         {
             var stores = await _unitOfWork.Stores.GetAllAsync();
-            return stores.ToList();
+
+            var getAllStoresViewModel = new GetAllStoresViewModel
+            {
+                Stores = _mapper.Map<List<StoreViewModel>>(stores)
+            };
+
+            return getAllStoresViewModel;
         }
 
-        public async Task AddOrUpdate(Store model)
+
+        public async Task AddOrEdit(Store model)
         {
             if (model.Id == 0)
             {
@@ -39,5 +59,6 @@ namespace Stock.Application.Services.store
                 await _unitOfWork.Stores.DeleteAsync(store);
             }
         }
+
     }
 }

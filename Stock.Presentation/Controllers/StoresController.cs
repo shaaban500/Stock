@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Stock.Domain.Entities.Stores;
 using Stock.Domain.Interfaces.Services.Stores;
+using Stock.Domain.ViewModels.Stores;
 
 namespace Stock.Presentation.Controllers
 {
@@ -15,21 +17,42 @@ namespace Stock.Presentation.Controllers
         public async Task<IActionResult> GetAll()
         {
             var stores = await _storesService.GetAll();
-            return View(stores);
+            return View(nameof(GetAll), stores);
         }
 
 
-        public async Task<IActionResult> AddOrUpdate(Store model)
+        [HttpGet]
+        public async Task<IActionResult> AddOrEdit(long id = 0)
         {
-            await _storesService.AddOrUpdate(model);
+            if (id == 0)
+            {
+                return View(new StoreViewModel());
+            }
+            else
+            {
+                var storeViewModel = await _storesService.GetById(id);
+                
+                if (storeViewModel == null)
+                {
+                    return NotFound();
+                }
 
-            return RedirectToAction("Index", "Home");
+                return View(storeViewModel);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddOrEdit(Store model)
+        {
+            await _storesService.AddOrEdit(model);
+            return RedirectToAction("GetAll", "Stores");
         }
 
         public async Task<IActionResult> Delete(long id)
         {
             await _storesService.Delete(id);
-
+            
             return RedirectToAction(nameof(GetAll));
         }
     }
