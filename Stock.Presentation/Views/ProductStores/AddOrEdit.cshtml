@@ -1,0 +1,40 @@
+﻿@using Stock.Domain.ViewModels.ProductStores;
+@model AddProductStoreViewModel
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <form asp-action="Add" asp-controller="ProductStores">
+        <div class="flex-column align-items-center gap-2 w-100">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-4">
+                <label asp-for="SelectedStoreId"> Stores </label>
+                <select name="SelectedStoreId" class="input-box width100" asp-items="@(new SelectList(Model.Stores, "Id", "Name"))">
+                </select>
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="SelectedProductId"> Products </label>
+                <select name="SelectedProductId" class="input-box width100" asp-items="@(new SelectList(Model.Products, "Id", "Name"))">
+                </select>
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="OldQuantity" class="control-label"> Old Quantity </label>
+                <div class="input-group">
+                    <input asp-for="OldQuantity" class="form-control" />
+                </div>
+                <span asp-validation-for="OldQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="NewQuantity" class="control-label"> New Quantity </label>
+                <div class="input-group">
+                    <input asp-for="NewQuantity" class="form-control" />
+                </div>
+                <span asp-validation-for="NewQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

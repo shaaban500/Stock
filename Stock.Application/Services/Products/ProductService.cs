@@ -56,10 +56,5 @@ namespace Stock.Application.Services.Products
                 await _unitOfWork.Products.DeleteAsync(product);
             }
         }
-
-        public Task<List<ProductViewModel>> GetProductsByStoreId(long storeId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

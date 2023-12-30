@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Stock.Application.Services.Products;
+using Stock.Application.Services.ProductStores;
 using Stock.Application.Services.store;
 using Stock.Domain.Interfaces.Services.Products;
+using Stock.Domain.Interfaces.Services.ProductStores;
 using Stock.Domain.Interfaces.Services.Stores;
 using Stock.Domain.Interfaces.UnitOfWork;
 using Stock.Infrastructure.Contexts;
@@ -19,6 +21,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IStoresService, storeService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductStoreService, ProductStoreService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

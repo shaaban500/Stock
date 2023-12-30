@@ -1,13 +1,11 @@
-﻿using Stock.Domain.ViewModels.Products;
-using Stock.Domain.ViewModels.Stores;
+﻿using Stock.Domain.Entities.Products;
+using Stock.Domain.Entities.Stores;
 
-namespace Stock.Domain.ViewModels.Purchase
+namespace Stock.Domain.ViewModels.ProductStores
 {
     public class ProductStoreViewModel
     {
-        public long SelectedStoreId { get; set; }
-        public List<ProductViewModel> Products { get; set; }
-        public List<StoreViewModel> Stores { get; set; }
-
+        public long StoreId { get; set; }
+        public long ProductId { get; set; }
     }
 }
