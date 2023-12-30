@@ -1,13 +1,19 @@
-﻿@using Stock.Domain.ViewModels.Stores;
-@model List<StoreViewModel>
-@{
-    ViewData["Title"] = "Stores";
-}
+﻿@using Stock.Domain.ViewModels.Purchase;
+@model PurchaseViewModel
+
+<form method="post" asp-controller="Stores" asp-action="GetProductsByStoreId" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="SelectedStoreId"> Stores </label>
+        <select name="SelectedStoreId" class="input-box width100" asp-items="@(new SelectList(Model.Stores, "Id", "Name"))">
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary"> Get Products </button>
+</form>
 
 
 <h1 class="text-center mb-4">
     <i class="fa-solid fa-store"></i>
-    Stores 
+    Products
 </h1>
 
 <div class="d-flex justify-content-center">
@@ -21,15 +27,18 @@
                     Name
                 </th>
                 <th>
-                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Stores",null,Context.Request.Scheme)','New Store')" class="btn btn-dark" class="d-flex justify-content-center gap-2">
+                    Quantity
+                </th>
+                <th>
+                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Products",null,Context.Request.Scheme)','New Store')" class="btn btn-dark d-flex justify-content-center gap-2">
                         <i class="fas fa-add"></i>
-                        add store 
+                        add product
                     </a>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Products)
             {
                 <tr>
                     <td>
@@ -39,8 +48,11 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
                         <div class="d-flex justify-content-center gap-3">
-                            <a onclick="showInPopup('@Url.Action("AddOrEdit","Stores",new {id=item.Id},Context.Request.Scheme)','Update Store')"
+                            <a onclick="showInPopup('@Url.Action("AddOrEdit","Products",new {id=item.Id},Context.Request.Scheme)','Update Product')"
                                class="text-primary">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>

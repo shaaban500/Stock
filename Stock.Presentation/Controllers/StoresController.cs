@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Stock.Domain.Entities.Stores;
 using Stock.Domain.Interfaces.Services.Stores;
+using Stock.Domain.ViewModels.Products;
 using Stock.Domain.ViewModels.Stores;
 
 namespace Stock.Presentation.Controllers
@@ -43,7 +44,7 @@ namespace Stock.Presentation.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEdit(Store model)
+        public async Task<IActionResult> AddOrEdit(StoreViewModel model)
         {
             await _storesService.AddOrEdit(model);
             return RedirectToAction("GetAll", "Stores");

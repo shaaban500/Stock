@@ -4,9 +4,9 @@ using Stock.Domain.ViewModels.Stores;
 
 namespace Stock.Application.Mapping.Stores
 {
-    public class StoresMappingProfile : Profile
+    public class ProductsMappingProfile : Profile
     {
-        public StoresMappingProfile() 
+        public ProductsMappingProfile() 
         {
             CreateMap<StoreViewModel, Store>().ReverseMap();
         }

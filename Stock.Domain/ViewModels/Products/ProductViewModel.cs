@@ -1,11 +1,11 @@
 ﻿using Stock.Domain.Entities.Products;
 
-namespace Stock.Domain.ViewModels.Stores
+namespace Stock.Domain.ViewModels.Products
 {
-    public class StoreViewModel
+    public class ProductViewModel
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public List<Product> Products { get; set; }
+        public long Quantity { get; set; }
     }
 }

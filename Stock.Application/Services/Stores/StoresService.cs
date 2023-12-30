@@ -25,28 +25,25 @@ namespace Stock.Application.Services.store
         }
 
 
-        public async Task<GetAllStoresViewModel> GetAll()
+        public async Task<List<StoreViewModel>> GetAll()
         {
             var stores = await _unitOfWork.Stores.GetAllAsync();
-
-            var getAllStoresViewModel = new GetAllStoresViewModel
-            {
-                Stores = _mapper.Map<List<StoreViewModel>>(stores)
-            };
-
-            return getAllStoresViewModel;
+            var storesViewModel = _mapper.Map<List<StoreViewModel>>(stores);
+            return storesViewModel;
         }
 
 
-        public async Task AddOrEdit(Store model)
+        public async Task AddOrEdit(StoreViewModel model)
         {
+            var storeToAdd = _mapper.Map<Store>(model);
+           
             if (model.Id == 0)
             {
-                var store = await _unitOfWork.Stores.AddAsync(model);
+                var store = await _unitOfWork.Stores.AddAsync(storeToAdd);
             }
             else
             {
-                var store = await _unitOfWork.Stores.UpdateAsync(model);
+                var store = await _unitOfWork.Stores.UpdateAsync(storeToAdd);
             }
         }
 
