@@ -1,5 +1,5 @@
 ﻿@using Stock.Domain.ViewModels.Purchase;
-@model PurchaseViewModel
+@model ProductStoreViewModel
 
 <form method="post" asp-controller="Stores" asp-action="GetProductsByStoreId" enctype="multipart/form-data">
     <div class="form-group">
@@ -48,7 +48,7 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
+                        @*@Html.DisplayFor(modelItem => item.Quantity)*@
                     </td>
                     <td>
                         <div class="d-flex justify-content-center gap-3">

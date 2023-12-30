@@ -3,7 +3,7 @@ using Stock.Domain.ViewModels.Stores;
 
 namespace Stock.Domain.ViewModels.Purchase
 {
-    public class PurchaseViewModel
+    public class ProductStoreViewModel
     {
         public long SelectedStoreId { get; set; }
         public List<ProductViewModel> Products { get; set; }

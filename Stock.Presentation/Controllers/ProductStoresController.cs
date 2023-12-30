@@ -5,11 +5,11 @@ using Stock.Domain.ViewModels.Purchase;
 
 namespace Stock.Presentation.Controllers
 {
-    public class PurchaseController : Controller
+    public class ProductStoresController : Controller
     {
         private readonly IStoresService _storeService;
         private readonly IProductService _productService;
-        public PurchaseController(IStoresService storeService, IProductService productService)
+        public ProductStoresController(IStoresService storeService, IProductService productService)
         {
             _storeService = storeService;
             _productService = productService;
@@ -17,7 +17,7 @@ namespace Stock.Presentation.Controllers
 
         public async Task<IActionResult> GetAll(long storeId)
         {
-            var purchaseViewModel = new PurchaseViewModel
+            var purchaseViewModel = new ProductStoreViewModel
             {
                 SelectedStoreId = storeId,
                 Stores = await _storeService.GetAll(),

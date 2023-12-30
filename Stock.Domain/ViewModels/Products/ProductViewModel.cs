@@ -6,6 +6,5 @@ namespace Stock.Domain.ViewModels.Products
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public long Quantity { get; set; }
     }
 }

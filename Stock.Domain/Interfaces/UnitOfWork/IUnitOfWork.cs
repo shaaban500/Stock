@@ -1,4 +1,5 @@
 ﻿using Stock.Domain.Interfaces.Repositories.Products;
+using Stock.Domain.Interfaces.Repositories.ProductStores;
 using Stock.Domain.Interfaces.Repositories.Stores;
 
 namespace Stock.Domain.Interfaces.UnitOfWork
@@ -7,5 +8,6 @@ namespace Stock.Domain.Interfaces.UnitOfWork
     {
         IStoresRepository Stores { get; }
         IProductsRepository Products { get; }
+        IProductStoresRepository ProductStores { get; }
     }
 }

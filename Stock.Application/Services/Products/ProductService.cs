@@ -57,17 +57,9 @@ namespace Stock.Application.Services.Products
             }
         }
 
-        public async Task<List<ProductViewModel>> GetProductsByStoreId(long storeId)
+        public Task<List<ProductViewModel>> GetProductsByStoreId(long storeId)
         {
-            Expression<Func<Store, object>>[] includes = 
-            {
-                x => x.Products,
-            };
-
-            var store = await _unitOfWork.Stores.GetByIdAsync(x => x.Id == storeId, includes);
-            var products = _mapper.Map<List<ProductViewModel>>(store?.Products?.ToList());
-
-            return products;
+            throw new NotImplementedException();
         }
     }
 }
