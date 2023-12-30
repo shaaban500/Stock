@@ -49,7 +49,7 @@ namespace Stock.Application.Services.ProductStores
         public async Task<long> GetQuantityById(long storeId, long productId)
         {
             var productStore = await _unitOfWork.ProductStores.GetByIdAsync(ps => ps.StoreId == storeId && ps.ProductId == productId);
-            return productStore.Quantity;
+            return productStore == null ? 0 : productStore.Quantity;
         }
     }
 }

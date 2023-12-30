@@ -59,14 +59,14 @@ namespace Stock.Presentation.Controllers
         public async Task<IActionResult> Add(AddProductStoreViewModel model)
         {
             await _productStoreService.Add(model);
-            return RedirectToAction("GetAll", "ProductStores");
+            return RedirectToAction("GetAll", "ProductStores", new GetAllProductStoreViewModel { SelectedStoreId = model.SelectedStoreId});
         }
 
 
-        public async Task<IActionResult> GetQuantityById(long storeId = 0, long productId = 0)
+        public async Task<IActionResult> GetQuantityById(long storeId, long productId)
         {
-            var productViewModel = await _productStoreService.GetQuantityById(storeId, productId);
-            return View(productViewModel);
+            var quantity = await _productStoreService.GetQuantityById(storeId, productId);
+            return Ok(new {oldQuantity = quantity});
         }
     }
 }
