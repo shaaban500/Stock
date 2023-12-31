@@ -13,3 +13,5 @@
 - Auto Mapper
 - View Models
 - Toastify Notifications
+
+* live demo: http://codezonestockapp.somee.com/
