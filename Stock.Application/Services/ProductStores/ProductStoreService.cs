@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using NToastNotify;
 using Stock.Domain.Entities.ProductStores;
 using Stock.Domain.Interfaces.Services.ProductStores;
 using Stock.Domain.Interfaces.UnitOfWork;
@@ -11,11 +12,15 @@ namespace Stock.Application.Services.ProductStores
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public ProductStoreService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IToastNotification _toastr;
+
+        public ProductStoreService(IUnitOfWork unitOfWork, IMapper mapper, IToastNotification toastr)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _toastr = toastr;
         }
+
 
         public async Task Add(AddProductStoreViewModel viewModel)
         {
@@ -31,7 +36,8 @@ namespace Stock.Application.Services.ProductStores
                 };
 
                 var addedProductStore = await _unitOfWork.ProductStores.AddAsync(productStoreToAdd);
-                
+                _toastr.AddSuccessToastMessage("Added Successfully..");
+
                 return;
             }
 
@@ -39,8 +45,13 @@ namespace Stock.Application.Services.ProductStores
             {
                 productStore.Quantity = viewModel.NewQuantity;
                 var result = await _unitOfWork.ProductStores.UpdateAsync(productStore);
+                _toastr.AddSuccessToastMessage("Added Successfully..");
+                return;
             }
+
+            _toastr.AddErrorToastMessage("error happened..");
         }
+
 
         public async Task<List<ProductViewModel>> GetProductsByStoreId(long storeId)
         {
@@ -57,6 +68,7 @@ namespace Stock.Application.Services.ProductStores
 
             return productsWithQuantities;
         }
+
 
         public async Task<long> GetQuantityById(long storeId, long productId)
         {

@@ -19,6 +19,7 @@ namespace Stock.Application.Services.Products
             _toastr = toastr;
         }
 
+
         public async Task<ProductViewModel> GetById(long id = 0)
         {
             var product = await _unitOfWork.Products.GetByIdAsync(id);
@@ -26,12 +27,14 @@ namespace Stock.Application.Services.Products
             return productViewModel;
         }
 
+
         public async Task<List<ProductViewModel>> GetAll()
         {
             var products = await _unitOfWork.Products.GetAllAsync();
             var productsViewModel = _mapper.Map<List<ProductViewModel>>(products);
             return productsViewModel;
         }
+
 
         public async Task AddOrEdit(ProductViewModel model)
         {
@@ -49,6 +52,7 @@ namespace Stock.Application.Services.Products
             }
         }
 
+
         public async Task Delete(long id)
         {
             var product = await _unitOfWork.Products.GetByIdAsync(x => x.Id == id);
@@ -57,7 +61,10 @@ namespace Stock.Application.Services.Products
             {
                 await _unitOfWork.Products.DeleteAsync(product);
                 _toastr.AddSuccessToastMessage("Deleted Successfully..");
+                return;
             }
+            
+            _toastr.AddErrorToastMessage("no product found!!");
         }
     }
 }

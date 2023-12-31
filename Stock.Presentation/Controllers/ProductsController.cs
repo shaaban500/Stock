@@ -39,6 +39,7 @@ namespace Stock.Presentation.Controllers
             }
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEdit(ProductViewModel model)

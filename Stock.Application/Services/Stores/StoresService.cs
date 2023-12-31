@@ -59,7 +59,10 @@ namespace Stock.Application.Services.store
             {
                 await _unitOfWork.Stores.DeleteAsync(store);
                 _toastr.AddSuccessToastMessage("Deleted Successfully..");
+                return;
             }
+
+            _toastr.AddErrorToastMessage("no store found!!");
         }
 
     }

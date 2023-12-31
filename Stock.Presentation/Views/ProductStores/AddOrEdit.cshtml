@@ -29,7 +29,7 @@
         <div class="form-group mb-4">
             <label asp-for="NewQuantity" class="control-label"> New Quantity </label>
             <div class="input-group">
-                <input asp-for="NewQuantity" id="NewQuantity" class="form-control" />
+                <input asp-for="NewQuantity" id="NewQuantity" class="form-control" min="0" />
             </div>
             <span asp-validation-for="NewQuantity" class="text-danger"></span>
         </div>

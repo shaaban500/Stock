@@ -42,6 +42,7 @@ namespace Stock.Presentation.Controllers
             }
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEdit(StoreViewModel model)
@@ -49,6 +50,7 @@ namespace Stock.Presentation.Controllers
             await _storesService.AddOrEdit(model);
             return RedirectToAction("GetAll", "Stores");
         }
+
 
         public async Task<IActionResult> Delete(long id)
         {
