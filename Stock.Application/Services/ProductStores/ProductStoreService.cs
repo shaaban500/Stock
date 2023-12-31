@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Stock.Domain.Entities.ProductStores;
 using Stock.Domain.Interfaces.Services.ProductStores;
 using Stock.Domain.Interfaces.UnitOfWork;
 using Stock.Domain.ViewModels.Products;
@@ -21,12 +22,23 @@ namespace Stock.Application.Services.ProductStores
             var productStore = await _unitOfWork.ProductStores.GetByIdAsync(ps => ps.StoreId == viewModel.SelectedStoreId && ps.ProductId == viewModel.SelectedProductId);
             
             if (productStore == null)
-                return;
+            {
+                var productStoreToAdd = new ProductStore
+                {
+                    StoreId = viewModel.SelectedStoreId,
+                    ProductId = viewModel.SelectedProductId,
+                    Quantity = viewModel.NewQuantity
+                };
 
-            if(viewModel.NewQuantity > 0)
+                var addedProductStore = await _unitOfWork.ProductStores.AddAsync(productStoreToAdd);
+                
+                return;
+            }
+
+            if (viewModel.NewQuantity > 0)
             {
                 productStore.Quantity = viewModel.NewQuantity;
-                await _unitOfWork.ProductStores.UpdateAsync(productStore);
+                var result = await _unitOfWork.ProductStores.UpdateAsync(productStore);
             }
         }
 

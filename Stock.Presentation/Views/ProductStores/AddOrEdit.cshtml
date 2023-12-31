@@ -5,22 +5,24 @@
 }
 
 <div class="row">
-    <div class="flex-column align-items-center gap-2 w-100" id="productStoreForm">
+    <form asp-action="Add" asp-controller="ProductStores" class="flex-column align-items-center gap-2 w-100" id="productStoreForm" >
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group mb-4">
             <label asp-for="SelectedStoreId"> Stores </label>
-            <select name="SelectedStoreId" id="SelectedStoreId" class="input-box width100" asp-items="@(new SelectList(Model.Stores, "Id", "Name"))">
+            <select name="SelectedStoreId" id="SelectedStoreId" class="form-select" asp-items="@(new SelectList(Model.Stores, "Id", "Name"))">
+                <option> choose a store</option>
             </select>
         </div>
         <div class="form-group mb-4">
             <label asp-for="SelectedProductId"> Products </label>
-            <select name="SelectedProductId" id="SelectedProductId" class="input-box width100" asp-items="@(new SelectList(Model.Products, "Id", "Name"))">
+            <select name="SelectedProductId" id="SelectedProductId" class="form-select" asp-items="@(new SelectList(Model.Products, "Id", "Name"))">
+                <option>choose a product</option>
             </select>
         </div>
         <div class="form-group mb-4">
             <label asp-for="OldQuantity" class="control-label"> Old Quantity </label>
             <div class="input-group">
-                <input asp-for="OldQuantity" id="OldQuantity" class="form-control" />
+                <input asp-for="OldQuantity" id="OldQuantity" class="form-control" disabled/>
             </div>
             <span asp-validation-for="OldQuantity" class="text-danger"></span>
         </div>
@@ -34,9 +36,8 @@
         <div class="form-group">
             <button id="saveButton" class="btn btn-primary">Save</button>
         </div>
-    </div>
+    </form>
 </div>
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
