@@ -3,6 +3,7 @@ using Stock.Domain.ViewModels.Stores;
 using Stock.Domain.Entities.Stores;
 using Stock.Domain.Interfaces.Services.Stores;
 using Stock.Domain.Interfaces.UnitOfWork;
+using NToastNotify;
 
 namespace Stock.Application.Services.store
 {
@@ -10,13 +11,14 @@ namespace Stock.Application.Services.store
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-
-        public storeService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IToastNotification _toastr;
+        public storeService(IUnitOfWork unitOfWork, IMapper mapper, IToastNotification toastr)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _toastr = toastr;
         }
-        
+
         public async Task<StoreViewModel> GetById(long id = 0)
         { 
             var store = await _unitOfWork.Stores.GetByIdAsync(id);
@@ -40,10 +42,12 @@ namespace Stock.Application.Services.store
             if (model.Id == 0)
             {
                 var store = await _unitOfWork.Stores.AddAsync(storeToAdd);
+                _toastr.AddSuccessToastMessage("Added Successfully..");
             }
             else
             {
                 var store = await _unitOfWork.Stores.UpdateAsync(storeToAdd);
+                _toastr.AddSuccessToastMessage("Updated Successfully..");
             }
         }
 
@@ -54,6 +58,7 @@ namespace Stock.Application.Services.store
             if (store is not null)
             {
                 await _unitOfWork.Stores.DeleteAsync(store);
+                _toastr.AddSuccessToastMessage("Deleted Successfully..");
             }
         }
 

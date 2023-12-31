@@ -1,11 +1,9 @@
-﻿using System.Linq.Expressions;
-using AutoMapper;
+﻿using AutoMapper;
+using NToastNotify;
 using Stock.Domain.Entities.Products;
-using Stock.Domain.Entities.Stores;
 using Stock.Domain.Interfaces.Services.Products;
 using Stock.Domain.Interfaces.UnitOfWork;
 using Stock.Domain.ViewModels.Products;
-using Stock.Domain.ViewModels.Purchase;
 
 namespace Stock.Application.Services.Products
 {
@@ -13,10 +11,12 @@ namespace Stock.Application.Services.Products
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IToastNotification _toastr;
+        public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IToastNotification toastr)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _toastr = toastr;
         }
 
         public async Task<ProductViewModel> GetById(long id = 0)
@@ -40,10 +40,12 @@ namespace Stock.Application.Services.Products
             if (model.Id == 0)
             {
                 var product = await _unitOfWork.Products.AddAsync(productToAdd);
+                _toastr.AddSuccessToastMessage("Added Successfully..");
             }
             else
             {
                 var product = await _unitOfWork.Products.UpdateAsync(productToAdd);
+                _toastr.AddSuccessToastMessage("Updated Successfully..");
             }
         }
 
@@ -54,6 +56,7 @@ namespace Stock.Application.Services.Products
             if (product is not null)
             {
                 await _unitOfWork.Products.DeleteAsync(product);
+                _toastr.AddSuccessToastMessage("Deleted Successfully..");
             }
         }
     }

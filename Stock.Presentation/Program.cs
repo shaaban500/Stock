@@ -25,6 +25,13 @@ builder.Services.AddScoped<IProductStoreService, ProductStoreService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddControllersWithViews().AddNToastNotifyNoty(new NToastNotify.NotyOptions()
+{
+    ProgressBar = true,
+    Timeout = 3000,
+    Theme = "metroui",
+});
+
 
 var app = builder.Build();
 
@@ -33,6 +40,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+app.UseNToastNotify();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
