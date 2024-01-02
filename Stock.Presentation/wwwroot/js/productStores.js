@@ -28,3 +28,17 @@ function updateOldQuantity() {
         }
     });
 }
+
+
+
+function validateForm() {
+    var selectedStoreId = document.getElementById('SelectedStoreId').value;
+    var selectedProductId = document.getElementById('SelectedProductId').value;
+
+    if (selectedStoreId === "choose a store" || selectedProductId === "choose a product") {
+        alert('Please select a store and a product.');
+        return false; // Prevent form submission
+    }
+
+    return true;
+}
