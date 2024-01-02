@@ -9,5 +9,8 @@ namespace Stock.Domain.Interfaces.UnitOfWork
         IStoresRepository Stores { get; }
         IProductsRepository Products { get; }
         IProductStoresRepository ProductStores { get; }
+
+        void Save();
+        Task<int> SaveAsync();
     }
 }

@@ -43,7 +43,7 @@ namespace Stock.Application.Services.ProductStores
 
             if (viewModel.NewQuantity > 0)
             {
-                productStore.Quantity = viewModel.NewQuantity;
+                productStore.Quantity += viewModel.NewQuantity;
                 var result = await _unitOfWork.ProductStores.UpdateAsync(productStore);
                 _toastr.AddSuccessToastMessage("Added Successfully..");
                 return;
